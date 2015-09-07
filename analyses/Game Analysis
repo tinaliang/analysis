@@ -1,0 +1,133 @@
+
+#Project Journal
+###Time Review
+I started researching and planning for this project on Saturday, August 29th. When I say that though, I really mean that I coded while I planned. So I came off the starting board already running. Looking back, I should have probably taken more time to research and learn about javaFx in planning my project -- it would have made designing the code much more easier. Including all the time I spent researching, I would say I spent around 30-40 hours working on this project.
+
+My time was spent coding/researching most of the time. I went back and forth a few times on code design, so I basically ended up following the code structure of the example given in class, then deciding that wasn't going to work, finding another way to structure the code, and attempting it that way. I would say I wasted a lot of time because of this reason. I spent most of my time structuring my code and refactoring it, to be honest, before I even started testing it. I would say that in this project, I've learned what to do and what not to do so that's helpful.
+
+I personally managed this code very poorly. I didn't make my first push until I had already spent around 20 hours on it. This was mostly because I wanted to push something onto gitHub that was already complete, but I didn't realize that the TA's would not be able to see my progress if I did so. 
+
+I would say that it was easy for me to code for a long time, but it was really hard for me to find out about new features of javaFx that I could use in my code. Maybe it was my insufficient planning or maybe it was my lack of an ability to Google, but I wasted a lot of time online, trying to figure out how to code something that I didn't know. I think my code ended up being very inefficient because I simply did not know about certain functions or commands. It actually worked better when I simply coded based off of what I already know, bad code or not. 
+
+###Commits
+I didn't commit very often, but I felt that every time I committed, it was because I had achieved something important. I had 28 commits in all, and looking at the code frequencies, it looks like the average number of additions was around 1.5k while the average number of deletions was around 1.0k so it seems like I changed a lot of code between each commit. 
+
+Looking over my commit messages, I don't think they accurately describe everything that's going on. I missed a lot of the times I went back and forth between code. Towards the end, however, they started following my trajectory more closely as I commited more times. 
+
+"Started following online tutorial to create game" was the commit that helped my code work in the end. Before then, I had tried to base my code off of the example given in class, but it wasn't working very well. I was browsing through the links online and found this one:
+http://gamedevelopment.tutsplus.com/tutorials/introduction-to-javafx-for-game-development--cms-23835
+
+Once I read through that one completely, I was able to use the example code to figure out how my code should be structured and it finally started working. 
+
+"boss level works, start screen is simple but works too" is another commit I made. This is when things started working and my code began to compile so I could begin testing my code and so I wanted to save it before I screwed it up even more.
+
+I chose to package commits together that followed a common theme, aka they were all based on fixing the Boss level or they all were fixing a bug of a certain sort. I would say the commit's size is reasonable to be reviewed before being allowed in the repository because it is usually large enough of a change that you would not be hunting down the changes that I made, but it is not so large that I would be completely changing the code.
+
+
+###Conclusions
+I think I definitely understimated the size of this project, and I will never do that again. I will estimate better in the future by tacking on extra time at the end for code review, which I did not really have ample time for in this project. The Game.java class needs the most editing in this project because that's where most of my original code is. To be a better designer, I need to learn how to refactor this project more accurately. If I could work on my project right now, I would take more time in refactoring my project. 
+
+
+#Design Review
+###Status
+
+The code is generally consistent in its layout, naming conventions, descriptiveness, and style. I made a real effort to name everything as something that would indicate in part what it was meant to function as. I do think there are some parts of the code that isn't as readable and I probably should have included some comments in there, but I did not comment as I went because I am unused to doing so, and I ran out of time at the end to comment. In future assignments, however, I will make sure to comment my code in areas that are uncertain of the function. I would also say that my code isn't completely foolproof. There are certain areas where the coding could almost be hardcoding and it would be pretty hard to change some variables without messing up the game. 
+
+I do have a lot of global variables in the game, so I guess you could say that the dependencies in the code are not clear and easy to find. 
+
+One function I used a lot was :
+```javascript
+	public static int randInt(int min, int max){
+		Random rando = new Random();
+		int randoNum = rando.nextInt((max - min) + 1) + min;
+		return randoNum;
+	}
+```
+
+This piece of code is a function that is given two numbers, the min and the max, and then it returns a random integer that lies between those two numbers. I found the random number generator online, after looking through a bunch of other options, I decided that this one was best fit for my project.
+
+This random number generator is used in multiple places of the project for differing reasons. I use it to randomly generate where and what kind of rectangles are used in the Boss level, and it's used to place the enemy circles in the regular level. I think the reason why this code stuck out to me was because I originally intended it to have one use only, but then I ended up using it for three other things as well.
+
+This code is easy to understand because it only has one simple function and the naming was done very efficiently so you know exactly what each variable is for and what the function is for. 
+
+I also like this code:
+
+    private void moveBlock(KeyCode code){
+  	
+    	switch (code) {
+    	case RIGHT:
+    		if (mrBlock.getX() == width - 50)
+    			break;
+    		mrBlock.setX(mrBlock.getX() + speed);
+    		break;
+
+    	case LEFT:
+    		if (mrBlock.getX() <= 50)
+    			break;
+    		mrBlock.setX(mrBlock.getX() - speed);
+
+    		break;
+    	case UP:
+    		if (mrBlock.getY() == 50)
+    			break;
+    		mrBlock.setY(mrBlock.getY() - speed);
+
+    		break;
+    	case DOWN:
+    		if (mrBlock.getY() == height - 50)
+    			break;
+    		mrBlock.setY(mrBlock.getY() + speed);
+
+    		break;
+    	case SPACE:
+    		//cheat key - gives invincibility
+    		invincible = true;
+    		break;
+    	case W:
+    		//cheat key - too lazy to play so automatic win
+    		won();
+    		break;
+    	case L:
+    		//cheat key - too lazy to lose so automatic lose
+    		endGame();
+    		break;
+    	case Z:
+    		//switch modes
+    		switchGame();
+    		break;
+    	default:
+    		// do nothing
+    	}
+    }
+   
+The reason why I liked this code was because it was clean and easy to debug. The purpose of this code is to move mrBlock, but it also functions as the cheat keys code. If I was to separate the two, I'm sure my code would be cleaner, but it was functionally more efficient this way. The reason I picked this code to showcase was because I wasn't sure which was the better option. I packaged two design aspects of my game into one function, and the function works fine, but I don't know if we're supposed to be efficient (like I was) or if I should have split up the function so the design was explicitly clear on the purpose of each function, aka each function has only one purpose. 
+
+The actual code of this function make it easy to understand; however, I will admit that having two purposes in one function makes it easy to miss one of the purposes.
+
+###Design
+I decided to organize the program into one game. I originally had it designed into two, with a bunch of other classes that called things in such as the circles and rectangles and such, but I couldn't figure out how to get all the classes to work together, so I just ended up putting it all into one giant class. I tried to organize the class itself. I have the set -up, and the step methods and everything else is shared by the two levels. I designed the code to be able to switch between classes using a boolean that gets updated when you use a cheat key or win the level. To add a new level to the game would therefore be easy because I would just have to add another boolean, and place the code into the Game.java class. 
+
+I designed my code the way I did because I wasn't able to make it work any other way and I thought a working game was more important than having pretty looking code. I really wrestled with trying to extract methods to make my code better designed. Any time I did that, my code would die on me, and the game would stop working. I guess this means my code wasn't very robust and was pretty much hard-coded to only work one way. So I'm sorry if the design of my code isn't very well-done. I'll be working on that in the future. There are a few assumptions about sizes of things in my program. The reason for this is because I tried using just the variables, but for some reason I couldn't figure out, the code wouldn't work when I tried calling in the variables. It would only work when I gave the exact same number, just as an integer instead of as the sum or subtractions of the variables. 
+
+One feature from the class assignment was to have cheat keys in your code. I used the Game.java class to implement this feature, and specifically, the moveBlock() method (featured above) to implement the feature. This feature is implemented first in the init() function when moveBlock() is called by the function in a way that initializes the pressing of keys. It is assumed that keys will be used in this game. I do not believe that the flexibility of this function is limited because no matter what, even if you decide not to move the block, you are still able to access this function to use the cheat keys due to the way it was initialized. I do think the name of the function is confounding because I did not make a reference to the fact that it also functions as the keys for the cheats.
+
+Another feature from the assignment specification was to have two different modes or levels. I used the Game.java class to implement this feature as well. I basically realized that even though the playing methods of the two modes were vastly different, the underlying code could be shared among the two levels. I tried to do so by creating a boolean that allowed you to choose which excerpts of code would be shared in each function, while having the shared code of the levels be run each time. To switch between the excerpted areas of code, I created two boolean values, one for each mode. If the mode was on, then that code would execute. I think the design of this feature is not completed robust because I have not tested what would happen if both features were set to "true". I should have included a failsafe for that. I assume you are a nice person who will not try to break my code. 
+
+###Alternate Designs
+An alternate design that would have made my code a lot cleaner was the creation of more classes. I could have avoided the top area of my code where there are literally way too many variables being instantiated. 
+
+I wish I had decided to make more classes instead of taking the easy way out and placing all code in one class. I had tried to split the two levels into two different classes before I realized how much duplicated code lay between the two of them. Because I chose not to make a third class of the duplicated code (I was afraid I wouldn't be able to figure out how to reliably call between the classes), I made one massive class of too much code instead. Pros included that it was easier to code everything and call variables and such. Cons included that it was harder to navigate through and the code was messier. 
+
+I would have preferred to have many many classes with a little bit of code each in them because it makes my code easier to understand and change. 
+
+Three bugs that remain.
+1. I do not properly clear all global variables so continued runs of my game will lead to changes in the movements of the enemy circles and the rectangles.
+2. The circles do not move completely independent of each other
+3. The levels cannot both be set to true.
+
+
+#Code Masterpiece
+
+The component that I think is well-designed is the if(level) loop within the init() function. The reason why I think this is well-designed is because in the original code, I had each Circle coded by itself. In this code, I am calling another class Circles (from circleGenerator) that creates the circles by themsevles. I do not think it is perfectly designed yet because I can't figure out how to have different circle names each time if I were to try to implement it all in a forloop.
+
+> Written with [StackEdit](https://stackedit.io/).
